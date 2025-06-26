@@ -7,19 +7,42 @@ import Image from "next/image"
 import Link from "next/link"
 
 export default function CarisaCareLanding() {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    const data = {
+      firstName: formData.get('firstName'),
+      lastName: formData.get('lastName'),
+      email: formData.get('email'),
+      phone: formData.get('phone'),
+      message: formData.get('message'),
+    };
+
+    const response = await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    });
+
+    if (response.ok) {
+      alert("Thanks! We've received your message.");
+      form.reset();
+    } else {
+      alert('There was a problem sending your message. Please try again.');
+    }
+  };
+
   return (
     <div className="flex flex-col min-h-screen">
+
       {/* Header */}
       <header className="bg-white shadow-sm sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+        <div className="container mx-auto px-4 py-2 flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <Image
-              src="/images/carisa-care-logo.svg"
-              alt="Carisa Care"
-              width={500}
-              height={80}
-              className="h-16 w-auto"
-            />
+            <img src="/logo-assets/png/color_transparent_small.png" alt="Carisa Care" className="w-auto h-16" />
           </div>
           <nav className="hidden md:flex items-center space-x-8">
             <Link href="#services" className="text-gray-700 hover:text-rose-600 transition-colors">
@@ -31,7 +54,6 @@ export default function CarisaCareLanding() {
             <Link href="#contact" className="text-gray-700 hover:text-rose-600 transition-colors">
               Contact
             </Link>
-            <Button className="bg-rose-600 hover:bg-rose-700">Get Started</Button>
           </nav>
         </div>
       </header>
@@ -61,12 +83,15 @@ export default function CarisaCareLanding() {
                     Learn More
                   </Button>
                 </div>
-                <div className="flex items-center space-x-6 pt-4">
-                  <div className="flex items-center space-x-2">
-                    <CheckCircle className="h-5 w-5 text-green-600" />
-                    <span className="text-sm text-gray-600">NDIS Registered Provider</span>
+                <div className="flex items-start space-x-6 pt-4">
+                  <div>
+                    <div className="flex items-center space-x-2">
+                      <CheckCircle className="h-5 w-5 text-green-600" />
+                      <span className="text-sm text-gray-600">NDIS Registered Provider</span>
+                    </div>
+                    <Image src="/NDIS.png" alt="NDIS Logo" width={100} height={50} className="mt-2"/>
                   </div>
-                  <div className="flex items-center space-x-2">
+                  <div className="flex items-center space-x-2 pt-px">
                     <Star className="h-5 w-5 text-yellow-500" />
                     <span className="text-sm text-gray-600">5-Star Rated Service</span>
                   </div>
@@ -74,7 +99,7 @@ export default function CarisaCareLanding() {
               </div>
               <div className="relative">
                 <Image
-                  src="/placeholder.svg?height=500&width=600"
+                  src="/stock_photos/friends-having-fun-together.jpg"
                   alt="Caring support worker with client"
                   width={600}
                   height={500}
@@ -188,7 +213,7 @@ export default function CarisaCareLanding() {
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
                 <Image
-                  src="/placeholder.svg?height=400&width=500"
+                  src="stock_photos/support_down.jpg"
                   alt="Our team of caring professionals"
                   width={500}
                   height={400}
@@ -525,44 +550,46 @@ export default function CarisaCareLanding() {
                   </div>
                 </div>
 
-                
+
               </div>
+              <form >
 
-              <Card>
-                <CardHeader>
-                  <CardTitle>Send us a message</CardTitle>
-                  <CardDescription>Fill out the form below and we'll get back to you within 24 hours.</CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <label className="text-sm font-medium text-gray-700 mb-2 block">First Name</label>
-                      <Input placeholder="Your first name" />
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Send us a message</CardTitle>
+                    <CardDescription>Fill out the form below and we'll get back to you within 24 hours.</CardDescription>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <label className="text-sm font-medium text-gray-700 mb-2 block">First Name</label>
+                        <Input name="firstname" placeholder="Your first name" />
+                      </div>
+                      <div>
+                        <label className="text-sm font-medium text-gray-700 mb-2 block">Last Name</label>
+                        <Input name="lastname" placeholder="Your last name" />
+                      </div>
                     </div>
+
                     <div>
-                      <label className="text-sm font-medium text-gray-700 mb-2 block">Last Name</label>
-                      <Input placeholder="Your last name" />
+                      <label className="text-sm font-medium text-gray-700 mb-2 block">Email</label>
+                      <Input name="email" type="email" placeholder="your.email@example.com" />
                     </div>
-                  </div>
 
-                  <div>
-                    <label className="text-sm font-medium text-gray-700 mb-2 block">Email</label>
-                    <Input type="email" placeholder="your.email@example.com" />
-                  </div>
+                    <div>
+                      <label className="text-sm font-medium text-gray-700 mb-2 block">Phone</label>
+                      <Input name="phone" type="tel" placeholder="Your phone number" />
+                    </div>
 
-                  <div>
-                    <label className="text-sm font-medium text-gray-700 mb-2 block">Phone</label>
-                    <Input type="tel" placeholder="Your phone number" />
-                  </div>
+                    <div>
+                      <label className="text-sm font-medium text-gray-700 mb-2 block">Message</label>
+                      <Textarea placeholder="Tell us about your support needs or ask any questions..." rows={4} />
+                    </div>
 
-                  <div>
-                    <label className="text-sm font-medium text-gray-700 mb-2 block">Message</label>
-                    <Textarea placeholder="Tell us about your support needs or ask any questions..." rows={4} />
-                  </div>
-
-                  <Button className="w-full bg-rose-600 hover:bg-rose-700">Send Message</Button>
-                </CardContent>
-              </Card>
+                    <Button className="w-full bg-rose-600 hover:bg-rose-700">Send Message</Button>
+                  </CardContent>
+                </Card>
+              </form>
             </div>
           </div>
         </section>
@@ -573,13 +600,7 @@ export default function CarisaCareLanding() {
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-4 gap-8">
             <div className="space-y-4">
-              <Image
-                src="/images/carisa-care-logo.svg"
-                alt="Carisa Care"
-                width={150}
-                height={45}
-                className="h-10 w-auto brightness-0 invert"
-              />
+              <img src="/logo-assets/png/white_transparent_small.png" alt="Carisa Care" className="w-auto h-12" />
               <p className="text-gray-400">
                 Providing compassionate NDIS support services across Australia with dignity, respect, and care.
               </p>

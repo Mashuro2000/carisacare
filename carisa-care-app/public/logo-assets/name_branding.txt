@@ -1,0 +1,6 @@
+
+            Main text Font: Lexend Deca
+            Slogan Text Font: JP Zen Kaku Gothic New
+            COLOR RGBA: rgba(0, 0, 0, 1)
+            COLOR HEX: #000000
+            
