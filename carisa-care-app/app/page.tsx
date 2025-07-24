@@ -151,16 +151,20 @@ export default function CarisaCareLanding() {
                   At Carisa Care, we provide personalised disability support services under the NDIS to empower individuals to live independently and achieve their goals with dignity and respect. 
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <Button size="lg" className="bg-rose-600 hover:bg-rose-700 text-lg px-8 py-3">
-                    Start Your Journey
-                  </Button>
-                  <Button
-                    size="lg"
-                    variant="outline"
-                    className="border-rose-600 text-rose-600 hover:bg-rose-50 text-lg px-8 py-3"
-                  >
-                    Learn More
-                  </Button>
+                  <Link href="#contact" scroll={true}>
+                    <Button size="lg" className="bg-rose-600 hover:bg-rose-700 text-lg px-8 py-3">
+                      Start Your Journey
+                    </Button>
+                  </Link>
+                  <Link href="#services" scroll={true}>
+                    <Button
+                      size="lg"
+                      variant="outline"
+                      className="border-rose-600 text-rose-600 hover:bg-rose-50 text-lg px-8 py-3"
+                    >
+                      Learn More
+                    </Button>
+                  </Link>
                 </div>
                 <div className="flex items-start space-x-6 pt-4">
                   <div>
@@ -323,7 +327,7 @@ export default function CarisaCareLanding() {
                     <div>
                       <h3 className="font-semibold text-gray-900">Experienced Team</h3>
                       <p className="text-gray-600">
-                        Qualified mental health cliniciansand compassionate support workers with extensive training.
+                        Qualified mental health clinicians and compassionate support workers with extensive training.
                       </p>
                     </div>
                   </div>
@@ -611,32 +615,32 @@ export default function CarisaCareLanding() {
               <h3 className="font-semibold mb-4">Services</h3>
               <ul className="space-y-2 text-gray-400">
                 <li>
-                  <Link href="#" className="hover:text-white transition-colors">
+                  <Link href="#services" className="hover:text-white transition-colors">
                     In Home Care
                   </Link>
                 </li>
                 <li>
-                  <Link href="#" className="hover:text-white transition-colors">
+                  <Link href="#services" className="hover:text-white transition-colors">
                     Community Access
                   </Link>
                 </li>
                 <li>
-                  <Link href="#" className="hover:text-white transition-colors">
+                  <Link href="#services" className="hover:text-white transition-colors">
                     Mental Health Support
                   </Link>
                 </li>
                 <li>
-                  <Link href="#" className="hover:text-white transition-colors">
+                  <Link href="#services" className="hover:text-white transition-colors">
                     Respite Care
                   </Link>
                 </li>
                 <li>
-                  <Link href="#" className="hover:text-white transition-colors">
+                  <Link href="#services" className="hover:text-white transition-colors">
                     Supported Independent Living
                   </Link>
                 </li>
                 <li>
-                  <Link href="#" className="hover:text-white transition-colors">
+                  <Link href="#services" className="hover:text-white transition-colors">
                     Nursing Care
                   </Link>
                 </li>
